@@ -1,0 +1,93 @@
+<div class="modal-container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1 class="text2-style">Welcome to the DocuVerse</h1>
+        <p style="color:#e9ecef">Unleash the power of LlamaX, the ultimate file processing app powered by ChatGPT. Simply upload your file and experience the magic. Join now and embark on an exhilarating journey!</p>
+        <br>
+        <div class="form-wrapper">
+            <label for="document" class="form-label">Upload Document:</label>
+            <label for="file-input" class="custom-file-input">
+                Choose a file
+            </label>
+            <input id="file-input" type="file" name="document" class="file-input">
+        </div>
+        <button type="submit" class="upload-button">Upload</button>
+    </form>
+</div>
+
+
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #202123;
+    }
+
+    .modal-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        background-color: #353740;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 400px;
+        max-width: 100%;
+    }
+
+    .form-wrapper {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-weight: bold;
+        margin-right: 10px;
+        color: #fff;
+    }
+
+    .file-input {
+        display: none;
+    }
+
+    .custom-file-input {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 3px;
+        color: #495057;
+        cursor: pointer;
+    }
+
+    .custom-file-input:hover {
+        background-color: #e9ecef;
+    }
+
+    .upload-button {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .upload-button:hover {
+        background-color: #45a049;
+    }
+
+    .text2-style {
+        display: inline-block;
+        background: -webkit-linear-gradient(0deg,  #a371f7, #a5d6ff, #aff5b4);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-box-decoration-break: clone;
+    }
+</style>
