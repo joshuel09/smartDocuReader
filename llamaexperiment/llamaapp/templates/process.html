@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Process File</title>
+</head>
+
+<body>
+    <div class="modal-container">
+        <h1 class="text2-style">Processed File</h1>
+        <p style="margin-bottom:50px;">Uploaded file: {{ uploaded_file }}</p>
+
+        <form action="{% url 'process' %}" method="post">
+            {% csrf_token %}
+            <input type="file" name="file" style="display: none;">
+            <input type="text" name="question" placeholder="Enter your question" class="custom-textbox">
+            <input type="submit" value="Get Output">
+        </form>
+
+        <a href="{% url 'upload' %}" class="return-button" style="margin-top:50px; cursor: pointer; text-decoration: none;">Return</a>
+    </div>
+
+    {% if response %}
+    <div class="output-modal">
+        <h1 class="text1-style">Response:</h1>
+        <p class="response-message">{{ response|safe }}</p>
+    </div>
+    {% endif %}
+</body>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #202123;
+    }
+
+    .modal-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        background-color: #353740;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 400px;
+        max-width: 100%;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    input[type="submit"] {
+        margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    input[type="submit"],
+    p {
+        color: #fff;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-textbox {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: #202123;
+        border: 1px solid #ced4da;
+        border-radius: 3px;
+        color: #495057;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .output-modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin-left: 10px;
+        background-color: #6e6e80;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 400px;
+        max-width: 100%;
+    }
+
+    .response-message {
+        color: #fff;
+        white-space: pre-line;
+        font-family: 'Courier New', monospace;
+    }
+
+    .text1-style {
+        display: inline-block;
+        background: -webkit-linear-gradient(0deg, #a371f7, #a5d6ff, #aff5b4);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-box-decoration-break: clone;
+    }
+
+    .text2-style {
+        display: inline-block;
+        background: -webkit-linear-gradient(0deg, #a371f7, #a5d6ff, #aff5b4);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-box-decoration-break: clone;
+    }
+
+    .return-button {
+        margin-top: 50px;
+        background-color: #555;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .return-button:hover {
+        background-color: #777;
+    }
+</style>
+
+</html>
