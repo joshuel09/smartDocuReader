@@ -2,4 +2,5 @@ lib
 share
 bin
 llamaexperiment/documents/
-llamaexperiment/llamaapp/settings.py
+llamaexperiment/llamaexperiment/settings.py
+llamaexperiment/llamaexperiment/settings.py
