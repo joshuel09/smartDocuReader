@@ -10,6 +10,8 @@ from langchain import OpenAI
 CJKPDFReader = download_loader("CJKPDFReader")
 loader = CJKPDFReader()
 
+# Initialize the OpenAI language model
+openai_model = OpenAI(temperature=0, max_tokens=350)
 
 def home(request):
     return render(request, 'upload.html')
@@ -32,6 +34,7 @@ def upload_document(request):
 
     return render(request, 'upload.html')
 
+
 def process_document(request):
     document = Document.objects.last()  # Get the latest uploaded document
     if request.method == 'POST':
@@ -39,7 +42,8 @@ def process_document(request):
         query_text = request.POST['question']
         query_format = "please convert the text as markdown"
 
-        llm_predictor = LLMPredictor(llm=OpenAI(temperature = 0 , max_tokens= 350 )) 
+        llm_predictor = LLMPredictor(llm=openai_model)
+
         # rebuild storage context
         storage_context = StorageContext.from_defaults(persist_dir="index")
 
@@ -48,6 +52,6 @@ def process_document(request):
         query_engine = index.as_query_engine(llm_predictor=llm_predictor)
         response = query_engine.query(query_text + query_format)
 
-        return render(request, 'process.html', {'response':  markdown.markdown(str(response)), 'uploaded_file': document.file.name})
+        return render(request, 'process.html', {'response':  markdown.markdown(str(response)), 'uploaded_file': document.file.name, 'question': query_text})
 
     return render(request, 'process.html', {'uploaded_file': document.file.name})
