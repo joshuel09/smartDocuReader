@@ -6,12 +6,10 @@ from .models import Document
 from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader, LLMPredictor
 from llama_index import download_loader, StorageContext, load_index_from_storage
 from langchain import OpenAI
+from django.http import HttpResponse
 
 CJKPDFReader = download_loader("CJKPDFReader")
 loader = CJKPDFReader()
-
-# Initialize the OpenAI language model
-openai_model = OpenAI(temperature=0, max_tokens=350)
 
 def home(request):
     return render(request, 'upload.html')
@@ -34,7 +32,6 @@ def upload_document(request):
 
     return render(request, 'upload.html')
 
-
 def process_document(request):
     document = Document.objects.last()  # Get the latest uploaded document
     if request.method == 'POST':
@@ -42,8 +39,7 @@ def process_document(request):
         query_text = request.POST['question']
         query_format = "please convert the text as markdown"
 
-        llm_predictor = LLMPredictor(llm=openai_model)
-
+        llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, max_tokens=350))
         # rebuild storage context
         storage_context = StorageContext.from_defaults(persist_dir="index")
 
@@ -55,3 +51,4 @@ def process_document(request):
         return render(request, 'process.html', {'response':  markdown.markdown(str(response)), 'uploaded_file': document.file.name, 'question': query_text})
 
     return render(request, 'process.html', {'uploaded_file': document.file.name})
+
