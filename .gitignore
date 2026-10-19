@@ -4,3 +4,17 @@ bin
 llamaexperiment/documents/
 llamaexperiment/llamaexperiment/settings.py
 llamaexperiment/llamaexperiment/settings.py
+
+# macOS
+.DS_Store
+
+# Python / virtual environment
+__pycache__/
+*.pyc
+.venv/
+venv/
+pyvenv.cfg
+etc/
+
+# Jupyter
+.ipynb_checkpoints/
